@@ -50,6 +50,22 @@ public class InitCommandLineRunner implements CommandLineRunner {
 		LocalDateTime endTime = LocalDateTime.of(2019, 10, 17, 20, 0);
 		Event event = new Event("Kap 7", startTime, endTime);
 		eventRepository.save(event);
+		
+		startTime = LocalDateTime.of(2019, 11, 15, 8, 0);
+		endTime = LocalDateTime.of(2019, 11, 17, 20, 0);
+		event = new Event("Orange Cup", startTime, endTime);
+		eventRepository.save(event);
+		
+		startTime = LocalDateTime.of(2019, 12, 15, 8, 0);
+		endTime = LocalDateTime.of(2019, 12, 17, 20, 0);
+		event = new Event("Heinman Tournament", startTime, endTime);
+		eventRepository.save(event);
+		
+		startTime = LocalDateTime.of(2020, 1, 15, 8, 0);
+		endTime = LocalDateTime.of(2020, 1, 17, 20, 0);
+		event = new Event("Rick Pallow Invitational", startTime, endTime);
+		eventRepository.save(event);
+		
 
 		// fetch event
 		System.out.println("Event:");
@@ -58,8 +74,18 @@ public class InitCommandLineRunner implements CommandLineRunner {
 		System.out.println("-------------------------------");
 
 		// Division
-		Division division = new Division(event.getId(), "12U Boys Classic");
+		Division division = new Division(event.getId(), "12U Boys Classic", false);
 		divisionRepository.save(division);
+		Division promotedDivision = new Division(event.getId(), "12U Boys Platinum", true);
+		divisionRepository.save(promotedDivision);
+		Division division2 = new Division(event.getId(), "12U Boys Gold", false);
+		divisionRepository.save(division2);
+		division2 = new Division(event.getId(), "14U Boys Classic", false);
+		divisionRepository.save(division2);
+		division2 = new Division(event.getId(), "14U Boys Platinum", false);
+		divisionRepository.save(division2);
+		division2 = new Division(event.getId(), "14U Boys Gold", false);
+		divisionRepository.save(division2);
 
 		// fetch all divisions
 		System.out.println("Divisions found:");
@@ -98,7 +124,7 @@ public class InitCommandLineRunner implements CommandLineRunner {
 		// Game
 		Game game = new Game();
 		game.setEventId(event.getId());
-		game.setDivisionId(division.getId());
+		game.setDivisionId(promotedDivision.getId());
 		game.setGameId("12BX-001");
 		game.setDarkCaps(kahuna);
 		game.setWhiteCaps(socal);
@@ -120,7 +146,7 @@ public class InitCommandLineRunner implements CommandLineRunner {
 		System.out.println("-------------------------------");
 		
 //		Find games by division
-		gamesResult = gameRepository.findByDivisionId(division.getId());
+		gamesResult = gameRepository.findByDivisionIdOrderByStartTimeAsc(division.getId());
 		System.out.println("findByDivisionId(division.getId():");
 		gamesResult.stream().forEach(System.out::println);
 		System.out.println("-------------------------------");

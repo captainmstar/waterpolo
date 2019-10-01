@@ -8,13 +8,15 @@ public class Division {
 	private String id;
 	private String eventId;
 	private String name;
+	private boolean promoted;
 
 	public Division() {
 	}
 
-	public Division(String eventId, String name) {
+	public Division(String eventId, String name, boolean promoted) {
 		this.eventId = eventId;
 		this.name = name;
+		this.promoted = promoted;
 	}
 
 	public String getId() {
@@ -41,9 +43,16 @@ public class Division {
 		this.eventId = eventId;
 	}
 
-	@Override
-	public String toString() {
-		return "Division [id=" + id + ", eventId=" + eventId + ", name=" + name + "]";
+	public boolean isPromoted() {
+		return promoted;
 	}
 
+	public void setPromoted(boolean promoted) {
+		this.promoted = promoted;
+	}
+
+	@Override
+	public String toString() {
+		return "Division [id=" + id + ", eventId=" + eventId + ", name=" + name + ", promoted=" + promoted + "]";
+	}
 }
