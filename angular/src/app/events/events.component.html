@@ -1,0 +1,22 @@
+<h1>Events</h1>
+
+<div class="alert alert-success" *ngIf='message'></div>
+
+<div class="container">
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Start Date</th>
+                <th>End Date</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr (click)="getEvent(event.id)" *ngFor='let event of events'> 
+                <td>{{event.name}}</td>
+                <td>{{event.startTime | date}}</td>
+                <td>{{event.endTime | date}}</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
