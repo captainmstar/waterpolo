@@ -1,0 +1,6 @@
+<div class="container" *ngIf="divisions">
+    <select [(ngModel)]="selectedDivision">
+        <option *ngFor="let division of divisions" [ngValue]="division">{{division.name}}</option>
+    </select>
+</div>
+<app-games *ngIf="selectedDivision" [division]="selectedDivision"></app-games>
